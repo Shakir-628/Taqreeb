@@ -1,0 +1,201 @@
+
+/* ── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  /* Colours */
+  --clr-primary:     #9b4d7a;
+  --clr-primary-dk:  #6f3157;
+  --clr-gold:        #c99b4b;
+  --clr-gold-lt:     #f5dba2;
+  --clr-text:        #2b2030;
+  --clr-muted:       #6f6670;
+  --clr-bg:          #fff7fb;
+  --clr-bg-dark:     #2b2030;
+  --clr-border:      #eadfe6;
+  --clr-success:     #2e8b68;
+  --clr-whatsapp:    #25d366;
+  --clr-white:       #ffffff;
+  --clr-surface:     #f9f4f7;
+
+  /* Radii */
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  20px;
+  --r-2xl: 24px;
+
+  /* Shadows */
+  --sh-sm: 0 2px 8px rgba(43, 32, 48, 0.06);
+  --sh-md: 0 8px 24px rgba(43, 32, 48, 0.08);
+  --sh-lg: 0 16px 48px rgba(43, 32, 48, 0.12);
+  --sh-xl: 0 24px 64px rgba(43, 32, 48, 0.14);
+
+  /* Spacing scale */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+}
+
+/* ── Typography helpers ────────────────────────────────────────────────────── */
+.font-display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important; }
+.text-muted   { color: var(--clr-muted); }
+.text-gold    { color: var(--clr-gold); }
+.text-primary { color: var(--clr-primary); }
+
+/* ── Links ─────────────────────────────────────────────────────────────────── */
+a { text-decoration: none; color: inherit; }
+
+/* ── Images ────────────────────────────────────────────────────────────────── */
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: var(--clr-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background-color: #d0c4cc; }
+::selection { background-color: rgba(155, 77, 122, 0.15); }
+
+/* ── Root layout ───────────────────────────────────────────────────────────── */
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── MUI Overrides ─────────────────────────────────────────────────────────── */
+.MuiContainer-root {
+  padding-left: var(--sp-8) !important;
+  padding-right: var(--sp-8) !important;
+}
+@media (max-width: 600px) {
+  .MuiContainer-root {
+    padding-left: var(--sp-4) !important;
+    padding-right: var(--sp-4) !important;
+  }
+}
+.MuiButton-root       { text-transform: none !important; }
+.MuiCard-root         { background-image: none !important; }
+.MuiPaper-root        { background-image: none !important; }
+
+/* Unified card style */
+.MuiCard-root {
+  border-color: var(--clr-border) !important;
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--sh-md) !important;
+}
+
+/* Autofill fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+}
+
+/* ── Animations ────────────────────────────────────────────────────────────── */
+@keyframes fadeIn   { from { opacity: 0; }                             to { opacity: 1; } }
+@keyframes slideUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn  { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pulse    { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes shimmer  {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in  { animation: fadeIn  0.35s ease-out; }
+.animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-slide-in { animation: slideIn 0.35s ease-out; }
+.animate-pulse    { animation: pulse   2s infinite; }
+.animate-heart    { animation: heartPop 0.4s ease; }
+
+/* ── Skeleton shimmer ──────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f0e8ed 25%, #ffe8f5 50%, #f0e8ed 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--r-md);
+}
+
+/* ── Vendor card hover ─────────────────────────────────────────────────────── */
+.vendor-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.vendor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sh-xl) !important;
+}
+
+/* ── Section layout utility ────────────────────────────────────────────────── */
+.section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-8);
+}
+@media (max-width: 600px) {
+  .section-container { padding: 0 var(--sp-4); }
+}
+
+/* ── WhatsApp button ───────────────────────────────────────────────────────── */
+.btn-whatsapp {
+  background-color: var(--clr-whatsapp) !important;
+  color: white !important;
+}
+.btn-whatsapp:hover {
+  background-color: #1fb954 !important;
+}
+
+/* ── Verified badge ────────────────────────────────────────────────────────── */
+.badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(46, 139, 104, 0.12);
+  color: var(--clr-success);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ── Active nav underline ──────────────────────────────────────────────────── */
+.nav-link-active {
+  color: var(--clr-primary) !important;
+  position: relative;
+}
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--clr-primary);
+  border-radius: 2px;
+}
+
+/* ── Filter chip active state ──────────────────────────────────────────────── */
+.chip-active {
+  background-color: var(--clr-primary) !important;
+  color: white !important;
+}
